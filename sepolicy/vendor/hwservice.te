@@ -9,3 +9,6 @@ type nxpnfc_hwservice, hwservice_manager_type;
 type hal_param_hwservice, hwservice_manager_type;
 type hal_rpmb_hwservice, hwservice_manager_type;
 type hal_wiredse_hwservice, hwservice_manager_type;
+
+type hal_omni_vibrator_hwservice, hwservice_manager_type;
+

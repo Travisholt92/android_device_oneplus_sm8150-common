@@ -19,6 +19,7 @@ type op2_file, file_type;
 type vl53l1_socket, file_type;
 
 # sysfs
+type sysfs_oem, sysfs_type, fs_type;
 type sysfs_aod, sysfs_type, fs_type;
 type sysfs_fod, sysfs_type, fs_type;
 type sysfs_fpc, sysfs_type, fs_type;
@@ -26,3 +27,7 @@ type sysfs_fsc, sysfs_type, fs_type;
 type sysfs_project_info, sysfs_type, fs_type;
 type sysfs_tri_state_key, sysfs_type, fs_type;
 type sysfs_vl53l1, sysfs_type, fs_type;
+type omni_sysfs_drm, sysfs_type, fs_type;
+type omni_sysfs_motor, sysfs_type, fs_type;
+type omni_data_file, file_type, data_file_type,  core_data_file_type;
+
