@@ -19,11 +19,11 @@ PRODUCT_COPY_FILES += \
 # Overlays
 DEVICE_PACKAGE_OVERLAYS += \
     $(LOCAL_PATH)/overlay \
-    $(LOCAL_PATH)/overlay-potato
+    $(LOCAL_PATH)/overlay-havoc
 
 PRODUCT_ENFORCE_RRO_TARGETS := *
 PRODUCT_ENFORCE_RRO_EXCLUDED_OVERLAYS += \
-    $(LOCAL_PATH)/overlay-potato/packages/apps/Snap
+    $(LOCAL_PATH)/overlay-havoc/packages/apps/Snap
 
 # A/B
 AB_OTA_UPDATER := true
@@ -86,15 +86,16 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.software.device_id_attestation.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.device_id_attestation.xml \
     frameworks/native/data/etc/android.software.midi.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.midi.xml \
     frameworks/native/data/etc/android.software.sip.voip.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.sip.voip.xml \
-    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml
+    frameworks/native/data/etc/handheld_core_hardware.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/handheld_core_hardware.xml \
+    vendor/havoc/config/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml:system/etc/permissions/vendor.lineage.biometrics.fingerprint.inscreen.xml
 
 # ANT+
 PRODUCT_PACKAGES += \
     AntHalService
 
-# potato Device Settings
+# Havoc Device Settings
 PRODUCT_PACKAGES += \
-    DeviceSettings
+   DeviceSettings
 
 # Atrace
 PRODUCT_PACKAGES += \
@@ -457,7 +458,11 @@ PRODUCT_PACKAGES += \
 
 # tri-state key
 PRODUCT_PACKAGES += \
-    tri-state-key_daemon
+    tri-state-key_daemon 
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.2-service.oneplus_msmnile
 
 # Update engine
 PRODUCT_PACKAGES += \
