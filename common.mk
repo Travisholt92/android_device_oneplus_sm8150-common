@@ -151,6 +151,7 @@ PRODUCT_COPY_FILES += \
     frameworks/av/services/audiopolicy/config/r_submix_audio_policy_configuration.xml:/$(TARGET_COPY_OUT_VENDOR)/etc/r_submix_audio_policy_configuration.xml \
     frameworks/av/services/audiopolicy/config/usb_audio_policy_configuration.xml:/$(TARGET_COPY_OUT_VENDOR)/etc/usb_audio_policy_configuration.xml
 
+
 PRODUCT_PACKAGES += oneplus-mock
 PRODUCT_BOOT_JARS += oneplus-mock
 
@@ -227,7 +228,7 @@ PRODUCT_PACKAGES += \
 # Display
 PRODUCT_PACKAGES += \
     android.hardware.graphics.composer@2.3-service \
-    android.hardware.graphics.mapper@3.0-impl-qti-display \
+    android.hardware.graphics.mapper@2.0-impl-qti-display \
     android.hardware.memtrack@1.0-impl \
     android.hardware.memtrack@1.0-service \
     gralloc.msmnile \
@@ -239,11 +240,11 @@ PRODUCT_PACKAGES += \
     libtinyxml \
     libvulkan \
     memtrack.msmnile \
-    vendor.display.config@1.10 \
+    vendor.display.config@1.7 \
     vendor.qti.hardware.display.allocator-service \
     vendor.qti.hardware.display.allocator@1.0-service \
     vendor.qti.hardware.display.allocator@1.0.vendor \
-    vendor.qti.hardware.display.mapper@3.0.vendor
+    vendor.qti.hardware.display.mapper@1.0.vendor
 
 # Doze
 PRODUCT_PACKAGES += \
@@ -339,11 +340,6 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     libchrome \
     libchrome.vendor
-
-# Namespace
-PRODUCT_BOARD_PLATFORM := msmnile
-PRODUCT_USES_QCOM_HARDWARE := true
-PRODUCT_SOONG_NAMESPACES += $(LOCAL_PATH)
 
 # Net
 PRODUCT_PACKAGES += \
@@ -460,6 +456,9 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     tri-state-key_daemon 
 
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.2-service.oneplus_msmnile
 
 # Update engine
 PRODUCT_PACKAGES += \
