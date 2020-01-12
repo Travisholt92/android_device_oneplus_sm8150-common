@@ -94,7 +94,7 @@ PRODUCT_PACKAGES += \
     AntHalService
 
 # Havoc Device Settings
-PRODUCT_PACKAGES += \
+ PRODUCT_PACKAGES += \
    DeviceSettings
 
 # Atrace
@@ -454,7 +454,7 @@ PRODUCT_PACKAGES += \
 
 # tri-state key
 PRODUCT_PACKAGES += \
-    tri-state-key_daemon 
+    tri-state-key_daemon \
 
 # Vibrator
 PRODUCT_PACKAGES += \

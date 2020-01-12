@@ -809,6 +809,10 @@
         <item>Sorry, fingerprint not available right now</item>
         <item>error 7</item>
         <item>error 8</item>
-    </string-array>																				  
+    </string-array>
+
+    <!-- The name of the package that will hold the dialer role by default. -->
+    <string name="config_defaultDialer" translatable="false">com.android.dialer</string>
+																				  
 
 </resources>
