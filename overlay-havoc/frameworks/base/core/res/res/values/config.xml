@@ -83,5 +83,18 @@
     <!-- FOD fingerprint scanner -->
     <bool name="config_needCustomFODView">true</bool>
 
+    <!-- Whether to enable oneplus cam hack -->
+    <bool name="config_hasOnePlusCamera">true</bool>
+
+    <!-- Whether the device has outdated qti-telephony-common.jar -->
+    <bool name="config_oldQtiTelephony">false</bool>
+
+
+    <!-- The CPU temperature sensor path, defaults to empty -->
+    <string name="config_cpuTempSensor" translatable="false">/sys/class/thermal/thermal_zone0/temp</string>
+
+    <!-- The CPU temperature divider, if needed -->
+    <integer name="config_cpuTempDivider" translatable="false">1000</integer>
+
 
 </resources>
