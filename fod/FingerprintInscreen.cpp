@@ -98,7 +98,7 @@ FingerprintInscreen::FingerprintInscreen() {
     this->mVendorFpService = IVendorFingerprintExtensions::getService();
     this->mVendorDisplayService = IOneplusDisplay::getService();
     std::string device = android::base::GetProperty("ro.product.device", "");
-    isOnePlus7 = device == "OnePlus7";
+    isOnePlus7 = device == "guacamoleb";
 }
 
 Return<void> FingerprintInscreen::onStartEnroll() {
