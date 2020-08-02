@@ -13,8 +13,9 @@
      limitations under the License.
 -->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          xmlns:tools="http://schemas.android.com/tools"
           android:sharedUserId="android.uid.system"
-          package="com.havoc.device.DeviceSettings"
+          package="org.lineageos.device.DeviceSettings"
           android:versionCode="1"
           android:versionName="1.0" >
 
@@ -22,11 +23,11 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS" />
-    <uses-permission android:name="android.permission.CAMERA" />
+
+    <protected-broadcast android:name=">org.lineageos.device.DeviceSettings.UPDATE_SLIDER_POSITION" />
 
     <uses-sdk
-        android:minSdkVersion="28"
-        android:targetSdkVersion="29" />
+        android:minSdkVersion="24" />
 
     <application
         android:icon="@drawable/ic_settings_device"
@@ -54,7 +55,7 @@
         <activity android:name=".KeyHandler" />
 
         <activity
-            android:name="com.havoc.device.DeviceSettings.PanelSettingsActivity"
+            android:name="org.lineageos.device.DeviceSettings.PanelSettingsActivity"
             android:exported="true"
             android:label="@string/panel_category_title"
             android:launchMode="singleTask" >
@@ -64,25 +65,15 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name="com.havoc.device.DeviceSettings.Startup" >
+        <receiver android:name="org.lineageos.device.DeviceSettings.Startup" >
             <intent-filter android:priority="100" >
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 
-        <!-- Quick Settings Tiles -->
+        <!-- Panel Mode's tile -->
         <service
-            android:name="com.havoc.device.DeviceSettings.DCModeTileService"
-            android:icon="@drawable/ic_dc_tile"
-            android:label="@string/tile_dc_mode"
-            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
-            <intent-filter>
-                <action
-                    android:name="android.service.quicksettings.action.QS_TILE"/>
-            </intent-filter>
-        </service>
-        <service
-            android:name="com.havoc.device.DeviceSettings.PanelModeTileService"
+            android:name="org.lineageos.device.DeviceSettings.PanelModeTileService"
             android:icon="@drawable/ic_panel_tile"
             android:label="@string/tile_panel_mode"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -91,8 +82,10 @@
                     android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
+
+        <!-- HBM tile -->
         <service
-            android:name="com.havoc.device.DeviceSettings.HBMModeTileService"
+            android:name="org.lineageos.device.DeviceSettings.HBMModeTileService"
             android:icon="@drawable/ic_hbm_tile"
             android:label="@string/tile_hbm_mode"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
@@ -101,10 +94,15 @@
                     android:name="android.service.quicksettings.action.QS_TILE"/>
             </intent-filter>
         </service>
+
+        <!-- Auto HBM service -->
+        <service android:name="org.lineageos.device.DeviceSettings.AutoHBMService" />
+
+        <!-- DC-Dimming tile -->
         <service
-            android:name="com.havoc.device.DeviceSettings.RefreshRateTileService"
-            android:icon="@drawable/ic_refresh_tile_60"
-            android:label="@string/tile_refresh_rate"
+            android:name="org.lineageos.device.DeviceSettings.DCModeTileService"
+            android:icon="@drawable/ic_dc_tile"
+            android:label="@string/tile_dc_mode"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
                 <action
@@ -112,14 +110,39 @@
             </intent-filter>
         </service>
 
-        <service android:name="com.havoc.device.DeviceSettings.FPSInfoService"
+        <!-- Log tile -->
+        <service
+            android:name="org.lineageos.device.DeviceSettings.LogTile"
+            android:icon="@drawable/ic_qs_log"
+            android:label="@string/quick_settings_log_tile_label"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <!-- FPS overlay tile -->
+        <service
+            android:name=".FPSTileService"
+            android:icon="@drawable/ic_fps"
+            android:label="@string/fps_info_title"
+            android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
+            <intent-filter>
+                <action
+                    android:name="android.service.quicksettings.action.QS_TILE"/>
+            </intent-filter>
+        </service>
+
+        <!-- FPS info service -->
+        <service android:name="org.lineageos.device.DeviceSettings.FPSInfoService"
                 android:exported="false">
         </service>
 
-        <!-- Search indexing -->
+        <!-- Search Provider -->
         <provider
             android:name=".ConfigPanelSearchIndexablesProvider"
-            android:authorities="com.havoc.device"
+            android:authorities="org.lineageos.device"
             android:multiprocess="false"
             android:grantUriPermissions="true"
             android:permission="android.permission.READ_SEARCH_INDEXABLES"
@@ -128,5 +151,28 @@
                 <action android:name="android.content.action.SEARCH_INDEXABLES_PROVIDER" />
             </intent-filter>
         </provider>
+
+        <activity
+            android:name=".thermal.ThermalActivity"
+            android:label="@string/thermal_title"
+            android:theme="@style/Theme.Main">
+            <intent-filter>
+                <action android:name="com.android.settings.action.IA_SETTINGS" />
+            </intent-filter>
+            <meta-data
+                android:name="com.android.settings.category"
+                android:value="com.android.settings.category.ia.battery" />
+            <meta-data
+                android:name="com.android.settings.summary"
+                android:resource="@string/thermal_summary" />
+            <meta-data
+                android:name="com.android.settings.order"
+                android:value="1" />
+        </activity>
+
+        <service
+            android:name=".thermal.ThermalService"
+            android:permission="ThermalService">
+        </service>
     </application>
 </manifest>
